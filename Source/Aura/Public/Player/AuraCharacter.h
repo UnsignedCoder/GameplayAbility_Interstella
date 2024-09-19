@@ -17,9 +17,15 @@ public:
 	// Sets default values for this character's properties
 	AAuraCharacter();
 
+	virtual void OnRep_PlayerState() override;
+	virtual void PossessedBy( AController* NewController ) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void InitialiseAuraAbilitySystem();
+private:
+	  
 
 };

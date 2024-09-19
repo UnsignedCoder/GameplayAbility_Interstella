@@ -3,8 +3,9 @@
 
 #include "Aura/Public/Player/AuraCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
+#include "Player/AuraPlayerState.h"
 
 
 // Sets default values
@@ -26,4 +27,24 @@ AAuraCharacter::AAuraCharacter() {
 void AAuraCharacter::BeginPlay() {
 	Super::BeginPlay();
 	
+}
+
+void AAuraCharacter::InitialiseAuraAbilitySystem() {
+	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+
+	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
+	AttributeSet = AuraPlayerState->GetAttributeSet();
+}
+
+void AAuraCharacter::OnRep_PlayerState() {
+	Super::OnRep_PlayerState();
+
+	InitialiseAuraAbilitySystem();
+}
+void AAuraCharacter::PossessedBy( AController* NewController ) {
+	Super::PossessedBy(NewController);
+
+	InitialiseAuraAbilitySystem();	
 }

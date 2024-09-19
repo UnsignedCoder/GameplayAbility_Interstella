@@ -19,4 +19,8 @@ void AGameCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-} 
+}
+
+UAbilitySystemComponent* AGameCharacter::GetAbilitySystemComponent() const {
+	return AbilitySystemComponent;
+}
