@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Aura/Public/BaseCharacter/GameCharacter.h"
+#include "Interaction/TargetInterface.h"
 #include "Enemy.generated.h"
 
 UCLASS()
-class AURA_API AEnemy : public AGameCharacter {
+class AURA_API AEnemy : public AGameCharacter, public ITargetInterface {
 	GENERATED_BODY()
 
 public:
@@ -19,9 +20,10 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// Called every frame
-	virtual void Tick( float DeltaTime ) override;
+	virtual void HighlightActor() override;
+	virtual void UnhighlightActor() override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent( class UInputComponent* PlayerInputComponent ) override;
+private:
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	bool bIsHighlighted = false;
 };
