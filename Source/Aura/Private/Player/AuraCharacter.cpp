@@ -3,9 +3,14 @@
 
 #include "Aura/Public/Player/AuraCharacter.h"
 
+#include <Windows.ApplicationModel.Activation.h>
+
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/AuraController.h"
 #include "Player/AuraPlayerState.h"
+#include "UI/HUD/AuraHUD.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 
 
 // Sets default values
@@ -29,22 +34,22 @@ void AAuraCharacter::BeginPlay() {
 	
 }
 
-void AAuraCharacter::InitialiseAuraAbilitySystem() {
-	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
-	check(AuraPlayerState);
-	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+void AAuraCharacter::InitialiseAuraAbilitySystem(AController* PController) {
+	if(AAuraPlayerState* AuraPlayerState = PController->GetPlayerState<AAuraPlayerState>()) {
+		AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
+		AttributeSet = AuraPlayerState->GetAttributeSet();
 
-	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
-	AttributeSet = AuraPlayerState->GetAttributeSet();
+		if (AAuraController* AuraController = Cast<AAuraController>(GetController())) {
+			AAuraHUD* AuraHUD = Cast<AAuraHUD>(AuraController->GetHUD());
+			if(AuraHUD) {
+				AuraHUD->InitOverlay(AuraController, AuraPlayerState, AbilitySystemComponent, AttributeSet);
+			}
+		} 
+	}	
 }
 
-void AAuraCharacter::OnRep_PlayerState() {
-	Super::OnRep_PlayerState();
-
-	InitialiseAuraAbilitySystem();
-}
-void AAuraCharacter::PossessedBy( AController* NewController ) {
+void AAuraCharacter::PossessedBy(AController* NewController) {
 	Super::PossessedBy(NewController);
 
-	InitialiseAuraAbilitySystem();	
+	InitialiseAuraAbilitySystem(NewController);
 }

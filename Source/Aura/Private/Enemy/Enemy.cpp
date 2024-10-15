@@ -26,9 +26,9 @@ void AEnemy::BeginPlay() {
 }
 
 void AEnemy::HighlightActor() {
-	bIsHighlighted = true;
+	bTargetIsHighlighted = true;
 }
 void AEnemy::UnhighlightActor() {
-	bIsHighlighted = false;
+	bTargetIsHighlighted = false;
 }
 

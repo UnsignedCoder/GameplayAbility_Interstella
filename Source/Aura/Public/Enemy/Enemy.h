@@ -25,5 +25,5 @@ public:
 
 private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	bool bIsHighlighted = false;
+	bool bTargetIsHighlighted = false;
 };

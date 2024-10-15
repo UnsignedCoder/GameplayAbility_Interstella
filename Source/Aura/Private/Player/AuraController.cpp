@@ -36,8 +36,9 @@ void AAuraController::SetupInputComponent() {
 
 void AAuraController::InitialiseInputMappings() {
 	UEnhancedInputLocalPlayerSubsystem* PlayerSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(PlayerSubsystem);
-	PlayerSubsystem->AddMappingContext(AuraMappingContext, 0);
+	if(PlayerSubsystem) {
+		PlayerSubsystem->AddMappingContext(AuraMappingContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::SlashedCircle;
