@@ -18,3 +18,5 @@ void UAuraWidgetController::InitWidgetController( const FWidgetControllerParams&
 	AbilitySystemComponent = WControllerParams.AbilitySystemComponent;
 	AttributeSet = WControllerParams.AttributeSet;
 }
+
+void UAuraWidgetController::BroadcastInitValues() {}

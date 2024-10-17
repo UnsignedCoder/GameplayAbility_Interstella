@@ -42,7 +42,8 @@ class AURA_API UAuraWidgetController : public UObject
 public:
 	UFUNCTION(BlueprintCallable)
 	void InitWidgetController(const FWidgetControllerParams& WControllerParams);
-	
+
+	virtual void BroadcastInitValues();
 protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
@@ -56,4 +57,8 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+public:
+	template < class T>
+	T* GetAttributeSet () const { return Cast<T>(AttributeSet); }
 };

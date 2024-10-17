@@ -63,7 +63,7 @@ void AAuraController::HandleMoveAction( const FInputActionValue& Value ) {
 	}
 }
 
-void AAuraController::CursorTrace() {
+void AAuraController::	CursorTrace() {
 	FHitResult CursorHit;
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 

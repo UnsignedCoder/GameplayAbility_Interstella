@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Aura/Public/BaseCharacter/GameCharacter.h"
-#include "Camera/CameraComponent.h"
 #include "AuraCharacter.generated.h"
 
 class USpringArmComponent;
@@ -26,5 +25,5 @@ protected:
 	void InitialiseAuraAbilitySystem(AController* PController);
 private:
 	  
-
+public:
 };

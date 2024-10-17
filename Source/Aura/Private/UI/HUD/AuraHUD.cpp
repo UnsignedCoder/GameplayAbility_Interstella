@@ -20,10 +20,10 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWIdgetController( const FWidgetCon
 }
 
 void AAuraHUD::InitOverlay( APlayerController* Controller, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AbilitySet ) {
-	checkf(OverlayWidgetClass, TEXT("OverlayWidgetClass is not set in AuraHUD"));
+	checkf(MasterWidgetClass, TEXT("MasterWidgetClass is not set in AuraHUD"));
 	checkf(OverlayWidgetControllerClass, TEXT("OverlayWidgetControllerClass is not set in AuraHUD"));
 
-	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), MasterWidgetClass);
 
 	OverlayWidget = Cast<UAuraUserWidget>(Widget);
 
@@ -31,5 +31,6 @@ void AAuraHUD::InitOverlay( APlayerController* Controller, APlayerState* PlayerS
 	UOverlayWidgetController* WidgetController = GetOverlayWIdgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
+	WidgetController->BroadcastInitValues();
 	OverlayWidget->AddToViewport();
 }
