@@ -30,7 +30,7 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UAuraUserWidget> MasterWidgetClass;
+	TSubclassOf<UAuraUserWidget> OverlayWidgetClass;
 
 	UPROPERTY()
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;

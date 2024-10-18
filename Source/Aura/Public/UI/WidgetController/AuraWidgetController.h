@@ -44,6 +44,8 @@ public:
 	void InitWidgetController(const FWidgetControllerParams& WControllerParams);
 
 	virtual void BroadcastInitValues();
+
+	virtual void BindCallbacksToDependencies();
 protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
