@@ -6,6 +6,7 @@
 #include "Aura/Public/BaseCharacter/GameCharacter.h"
 #include "AuraCharacter.generated.h"
 
+class AAuraPlayerState;
 class USpringArmComponent;
 
 UCLASS()
@@ -18,12 +19,19 @@ public:
 	
 	virtual void PossessedBy( AController* NewController ) override;
 
+	virtual void OnRep_PlayerState() override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void InitialiseAuraAbilitySystem(AController* PController);
+	void InitAuraAbilitySystem();
+
+	void InitAuraHUD() const;
 private:
-	  
+	// The player state associated with this character
+	UPROPERTY()
+	TObjectPtr<AAuraPlayerState> AuraPlayerState;
+	
 public:
 };

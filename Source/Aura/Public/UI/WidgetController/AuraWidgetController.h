@@ -16,22 +16,30 @@ USTRUCT(BlueprintType)
 struct FWidgetControllerParams {
 	GENERATED_BODY()
 
-	FWidgetControllerParams() {} 
+	FWidgetControllerParams() {
+		PLayerController = nullptr;
+ 
+		PlayerState = nullptr;
+
+		AbilitySystemComponent = nullptr;
+
+		AttributeSet = nullptr;
+	} 
 
 	FWidgetControllerParams(APlayerController* PController, APlayerState* AState, UAbilitySystemComponent* ASystem, UAttributeSet* ASet) :
 		PLayerController(PController), PlayerState(AState), AbilitySystemComponent(ASystem), AttributeSet(ASet) {}
 	
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
-	TObjectPtr<APlayerController> PLayerController = nullptr;
+	TObjectPtr<APlayerController> PLayerController;
 
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
-	TObjectPtr<APlayerState> PlayerState = nullptr;
+	TObjectPtr<APlayerState> PlayerState;
 
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent = nullptr;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
-	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
 
 UCLASS()
@@ -59,8 +67,4 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "AuraWidgetController")
 	TObjectPtr<UAttributeSet> AttributeSet;
-
-public:
-	template < class T>
-	T* GetAttributeSet () const { return Cast<T>(AttributeSet); }
 };

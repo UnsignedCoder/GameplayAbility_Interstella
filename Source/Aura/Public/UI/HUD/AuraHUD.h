@@ -22,7 +22,7 @@ public:
 	UPROPERTY()
 	TObjectPtr<UAuraUserWidget> OverlayWidget;
 
-	UOverlayWidgetController* GetOverlayWIdgetController( const FWidgetControllerParams& WidgetControllerParams);
+	UOverlayWidgetController* GetOverlayWidgetController( const FWidgetControllerParams& WidgetControllerParams);
 
 	void InitOverlay( APlayerController* Controller, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AbilitySet );
 	
